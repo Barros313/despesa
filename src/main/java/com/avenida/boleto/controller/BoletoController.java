@@ -7,8 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/despesas")
-public class Main {
+@RequestMapping("/boleto")
+public class BoletoController {
 
     Boleto boleto;
 
