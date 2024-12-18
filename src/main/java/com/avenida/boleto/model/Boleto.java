@@ -1,8 +1,16 @@
 package com.avenida.boleto.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.util.Date;
 
+
+@Entity
+@Table(name="boleto")
 public class Boleto {
+    @Id
     private Integer id;
     private Date vencimento;
     private String numero;
