@@ -11,11 +11,23 @@ public class Boleto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(nullable = false)
     private Date vencimento;
+
+    @Column(nullable = false)
     private String numero;
+
+    @Column(nullable = false)
     private String beneficiario;
+
+    @Column(nullable = false)
     private Double valor;
+
+    @Column(nullable = false)
     private int parcela;
+
+    @Column(nullable = false)
     private int totalParcela;
 
     public Boleto() {}
