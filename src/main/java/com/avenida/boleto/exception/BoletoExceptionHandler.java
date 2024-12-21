@@ -31,6 +31,4 @@ public class BoletoExceptionHandler {
 
         return new ResponseEntity<>(boletoException, HttpStatus.BAD_REQUEST);
     }
-
-    }
 }
