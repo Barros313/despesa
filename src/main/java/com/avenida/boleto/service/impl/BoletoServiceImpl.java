@@ -1,5 +1,6 @@
 package com.avenida.boleto.service.impl;
 
+import com.avenida.boleto.exception.BoletoNotFoundException;
 import com.avenida.boleto.model.Boleto;
 import com.avenida.boleto.repository.BoletoRepository;
 import com.avenida.boleto.service.BoletoService;
@@ -41,7 +42,11 @@ public class BoletoServiceImpl implements BoletoService {
     public Boleto getBoleto(Integer id) {
         Optional<Boleto> boleto = boletoRepository.findById(id);
 
-        return boleto.orElse(null);
+        if (boleto.isEmpty()) {
+            throw new BoletoNotFoundException("Boleto not found");
+        }
+
+        return boleto.get();
     }
 
     @Override
