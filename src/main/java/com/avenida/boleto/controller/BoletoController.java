@@ -27,7 +27,7 @@ public class BoletoController {
 
     @PostMapping
     public String insertBoleto(@RequestBody Boleto boleto) {
-        return boletoService.createBoleto(boleto);;
+        return boletoService.createBoleto(boleto);
     }
 
     @PutMapping
