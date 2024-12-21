@@ -46,12 +46,6 @@ public class BoletoServiceImpl implements BoletoService {
 
     @Override
     public List<Boleto> getAllBoletos() {
-        List<Boleto> boletos = boletoRepository.findAll();
-
-        if (!boletos.isEmpty()) {
-            return boletos;
-        }
-
-        return null;
+        return boletoRepository.findAll();
     }
 }
