@@ -1,8 +1,6 @@
 package com.avenida.boleto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -11,6 +9,7 @@ import java.util.Date;
 @Table(name="boleto")
 public class Boleto {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Date vencimento;
     private String numero;
