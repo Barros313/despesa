@@ -27,22 +27,16 @@ public class BoletoController {
 
     @PostMapping
     public String insertBoleto(@RequestBody Boleto boleto) {
-        boletoService.createBoleto(boleto);
-
-        return "Boleto inserted successfully";
+        return boletoService.createBoleto(boleto);;
     }
 
     @PutMapping
     public String updateBoleto(@RequestBody Boleto boleto) {
-        boletoService.updateBoleto(boleto);
-
-        return "Boleto updated successfully";
+        return boletoService.updateBoleto(boleto);
     }
 
     @DeleteMapping("/{id}")
     public String deleteBoleto(@PathVariable("id") Integer id) {
-        boletoService.deleteBoleto(id);
-
-        return "Boleto deleted successfully";
+        return boletoService.deleteBoleto(id);
     }
 }
