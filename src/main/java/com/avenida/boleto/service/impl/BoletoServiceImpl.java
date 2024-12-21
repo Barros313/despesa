@@ -26,7 +26,7 @@ public class BoletoServiceImpl implements BoletoService {
             throw new BoletoNotFoundException("Failed to save: boleto not saved");
         }
 
-        return "Successfully saved boleto";
+        return "Successfully saved boleto\n\n Boleto: " + savedBoleto.toString();
     }
 
     @Override
