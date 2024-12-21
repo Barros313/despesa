@@ -3,7 +3,6 @@ package com.avenida.boleto.service.impl;
 import com.avenida.boleto.model.Boleto;
 import com.avenida.boleto.repository.BoletoRepository;
 import com.avenida.boleto.service.BoletoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
