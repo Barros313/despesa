@@ -2,11 +2,9 @@ package com.avenida.boleto.controller;
 
 import com.avenida.boleto.model.Boleto;
 import com.avenida.boleto.service.BoletoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/boleto")
@@ -18,8 +16,13 @@ public class BoletoController {
     }
 
     @GetMapping("/{id}")
-    public Boleto fetchBoleto(Integer id) {
+    public Boleto getBoleto(@PathVariable("id") Integer id) {
         return boletoService.getBoleto(id);
+    }
+
+    @GetMapping("/all")
+    public List<Boleto> getAllBoletos() {
+        return boletoService.getAllBoletos();
     }
 
     @PostMapping
@@ -37,7 +40,7 @@ public class BoletoController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteBoleto(Integer id) {
+    public String deleteBoleto(@PathVariable("id") Integer id) {
         boletoService.deleteBoleto(id);
 
         return "Boleto deleted successfully";
