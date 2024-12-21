@@ -19,13 +19,24 @@ public class BoletoServiceImpl implements BoletoService {
 
     @Override
     public String createBoleto(Boleto boleto) {
-        boletoRepository.save(boleto);
+        // FIXME: Handle the case where the boleto is not saved in the database
+        Boleto savedBoleto = boletoRepository.save(boleto);
+
+        if (savedBoleto == null) {
+            throw new BoletoNotFoundException("Failed to save: boleto not saved");
+        }
 
         return "Successfully saved boleto";
     }
 
     @Override
     public String updateBoleto(Boleto boleto) {
+        Optional<Boleto> boletoToUpdate = boletoRepository.findById(boleto.getId());
+
+        if (boletoToUpdate.isEmpty()) {
+            throw new BoletoNotFoundException("Failed to update: boleto not found");
+        }
+
         boletoRepository.save(boleto);
 
         return "Successfully updated boleto";
@@ -33,6 +44,12 @@ public class BoletoServiceImpl implements BoletoService {
 
     @Override
     public String deleteBoleto(Integer id) {
+        Optional<Boleto> boleto = boletoRepository.findById(id);
+
+        if (boleto.isEmpty()) {
+            throw new BoletoNotFoundException("Failed to delete: boleto not found");
+        }
+
         boletoRepository.deleteById(id);
 
         return "Successfully deleted boleto";

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class BoletoExceptionHandler {
 
     @ExceptionHandler(value = { BoletoNotFoundException.class })
-    public ResponseEntity<Object> handleBoletoNotFoundException(BoletoNotFoundException boletoNotFoundException) {
+    public ResponseEntity<Object> handleBoletoNotFoundException
+            (BoletoNotFoundException boletoNotFoundException) {
         BoletoException boletoException = new BoletoException(
                 boletoNotFoundException.getMessage(),
                 boletoNotFoundException.getCause(),
@@ -17,5 +18,19 @@ public class BoletoExceptionHandler {
         );
 
         return new ResponseEntity<>(boletoException, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = { BoletoWrongFormatException.class })
+    public ResponseEntity<Object> handleBoletoWrongFormatException
+            (BoletoWrongFormatException boletoWrongFormatException) {
+        BoletoException boletoException = new BoletoException(
+                boletoWrongFormatException.getMessage(),
+                boletoWrongFormatException.getCause(),
+                HttpStatus.BAD_REQUEST);
+
+
+        return new ResponseEntity<>(boletoException, HttpStatus.BAD_REQUEST);
+    }
+
     }
 }
