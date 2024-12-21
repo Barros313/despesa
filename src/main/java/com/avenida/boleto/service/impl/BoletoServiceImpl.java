@@ -6,6 +6,7 @@ import com.avenida.boleto.service.BoletoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BoletoServiceImpl implements BoletoService {
     BoletoRepository boletoRepository;
@@ -16,26 +17,40 @@ public class BoletoServiceImpl implements BoletoService {
 
     @Override
     public String createBoleto(Boleto boleto) {
-        return "";
+        boletoRepository.save(boleto);
+
+        return "Successfully saved boleto";
     }
 
     @Override
     public String updateBoleto(Boleto boleto) {
-        return "";
+        boletoRepository.save(boleto);
+
+        return "Successfully updated boleto";
     }
 
     @Override
     public String deleteBoleto(Integer id) {
-        return "";
+        boletoRepository.deleteById(id);
+
+        return "Successfully deleted boleto";
     }
 
     @Override
     public Boleto getBoleto(Integer id) {
-        return null;
+        Optional<Boleto> boleto = boletoRepository.findById(id);
+
+        return boleto.orElse(null);
     }
 
     @Override
     public List<Boleto> getAllBoletos() {
-        return List.of();
+        List<Boleto> boletos = boletoRepository.findAll();
+
+        if (!boletos.isEmpty()) {
+            return boletos;
+        }
+
+        return null;
     }
 }
