@@ -1,10 +1,11 @@
 package com.avenida.boleto.controller;
 
 import com.avenida.boleto.model.Boleto;
+import com.avenida.boleto.response.ResponseHandler;
 import com.avenida.boleto.service.BoletoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/boleto")
@@ -16,27 +17,48 @@ public class BoletoController {
     }
 
     @GetMapping("/{id}")
-    public Boleto getBoleto(@PathVariable("id") Integer id) {
-        return boletoService.getBoleto(id);
+    public ResponseEntity<Object> getBoleto(@PathVariable("id") Integer id) {
+        return ResponseHandler.responseBuilder(
+                "Boleto encontrado",
+                HttpStatus.OK,
+                boletoService.getBoleto(id)
+        );
+
     }
 
     @GetMapping("/all")
-    public List<Boleto> getAllBoletos() {
-        return boletoService.getAllBoletos();
+    public ResponseEntity<Object> getAllBoletos() {
+        return ResponseHandler.responseBuilder(
+                "Lista de boletos",
+                HttpStatus.OK,
+                boletoService.getAllBoletos()
+        );
     }
 
     @PostMapping
-    public String insertBoleto(@RequestBody Boleto boleto) {
-        return boletoService.createBoleto(boleto);
+    public ResponseEntity<Object> insertBoleto(@RequestBody Boleto boleto) {
+        return ResponseHandler.responseBuilder(
+                "Boleto criado",
+                HttpStatus.CREATED,
+                boletoService.createBoleto(boleto)
+        );
     }
 
     @PutMapping
-    public String updateBoleto(@RequestBody Boleto boleto) {
-        return boletoService.updateBoleto(boleto);
+    public ResponseEntity<Object> updateBoleto(@RequestBody Boleto boleto) {
+        return ResponseHandler.responseBuilder(
+                "Boleto atualizado",
+                HttpStatus.OK,
+                boletoService.updateBoleto(boleto)
+        );
     }
 
     @DeleteMapping("/{id}")
-    public String deleteBoleto(@PathVariable("id") Integer id) {
-        return boletoService.deleteBoleto(id);
+    public ResponseEntity<Object> deleteBoleto(@PathVariable("id") Integer id) {
+        return ResponseHandler.responseBuilder(
+                "Boleto deletado",
+                HttpStatus.OK,
+                boletoService.deleteBoleto(id)
+        );
     }
 }
