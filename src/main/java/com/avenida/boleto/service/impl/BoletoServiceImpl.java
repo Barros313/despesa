@@ -1,9 +1,11 @@
 package com.avenida.boleto.service.impl;
 
 import com.avenida.boleto.exception.BoletoNotFoundException;
+import com.avenida.boleto.exception.BoletoWrongFormatException;
 import com.avenida.boleto.model.Boleto;
 import com.avenida.boleto.repository.BoletoRepository;
 import com.avenida.boleto.service.BoletoService;
+import org.hibernate.PropertyValueException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,11 +21,12 @@ public class BoletoServiceImpl implements BoletoService {
 
     @Override
     public String createBoleto(Boleto boleto) {
-        // FIXME: Handle the case where the boleto is not saved in the database
-        Boleto savedBoleto = boletoRepository.save(boleto);
-
-        if (savedBoleto == null) {
-            throw new BoletoNotFoundException("Failed to save: boleto not saved");
+        Boleto savedBoleto;
+        try {
+            savedBoleto = boletoRepository.save(boleto);
+        } catch (Exception e) {
+            System.err.println("Failed to save: " + e.getMessage());
+            throw new BoletoWrongFormatException("Failed to save: boleto has wrong format");
         }
 
         return "Successfully saved boleto\n\n Boleto: " + savedBoleto.toString();
