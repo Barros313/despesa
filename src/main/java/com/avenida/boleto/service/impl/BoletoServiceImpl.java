@@ -21,15 +21,14 @@ public class BoletoServiceImpl implements BoletoService {
 
     @Override
     public String createBoleto(Boleto boleto) {
-        Boleto savedBoleto;
         try {
-            savedBoleto = boletoRepository.save(boleto);
+            boletoRepository.save(boleto);
         } catch (Exception e) {
             System.err.println("Failed to save: " + e.getMessage());
             throw new BoletoWrongFormatException("Failed to save: boleto has wrong format");
         }
 
-        return "Successfully saved boleto\n\n Boleto: " + savedBoleto.toString();
+        return "Successfully saved boleto";
     }
 
     @Override
