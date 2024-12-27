@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
+
 @RestController
 @RequestMapping("/boleto")
 public class BoletoController {
@@ -59,6 +62,16 @@ public class BoletoController {
                 "Boleto deletado",
                 HttpStatus.OK,
                 boletoService.deleteBoleto(id)
+        );
+    }
+
+    @GetMapping("/date")
+    public ResponseEntity<Object> getBoletosByDate(@RequestBody Date vencimento) {
+        System.out.println(vencimento);
+        return ResponseHandler.responseBuilder(
+                "Boletos encontrados",
+                HttpStatus.OK,
+                boletoService.getBoletoByVencimento(vencimento)
         );
     }
 }

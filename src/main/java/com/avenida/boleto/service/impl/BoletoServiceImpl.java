@@ -5,9 +5,9 @@ import com.avenida.boleto.exception.BoletoWrongFormatException;
 import com.avenida.boleto.model.Boleto;
 import com.avenida.boleto.repository.BoletoRepository;
 import com.avenida.boleto.service.BoletoService;
-import org.hibernate.PropertyValueException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,5 +71,10 @@ public class BoletoServiceImpl implements BoletoService {
     @Override
     public List<Boleto> getAllBoletos() {
         return boletoRepository.findAll();
+    }
+
+    @Override
+    public List<Boleto> getBoletoByVencimento(Date vencimento) {
+        return boletoRepository.getBoletoByVencimento(vencimento);
     }
 }
